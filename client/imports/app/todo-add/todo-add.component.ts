@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { FormControl } from '@angular/forms';
 import { Meteor } from 'meteor/meteor';
 
 @Component({
@@ -7,9 +7,19 @@ import { Meteor } from 'meteor/meteor';
   templateUrl: 'todo-add.html'
 })
 export class TodoAddComponent {
-  content: string;
+  
+  name = new FormControl('');
+
+  constructor(){
+  	console.log('todo add constructor')
+  }
+
+  
+
+
   addTodo() {
-    Meteor.call('addTodo', this.content);
-    this.content = null;
+    Meteor.call('addTodo', this.name.value);
+    this.name.setValue('');
   }
 }
+
